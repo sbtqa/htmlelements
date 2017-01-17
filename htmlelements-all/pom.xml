@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+        <groupId>ru.sbtqa.htmlelements</groupId>
         <artifactId>htmlelements</artifactId>
-        <groupId>ru.yandex.qatools.htmlelements</groupId>
         <version>1.18-SNAPSHOT</version>
     </parent>
 
@@ -13,17 +13,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <groupId>ru.sbtqa.htmlelements</groupId>
             <artifactId>htmlelements-java</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <groupId>ru.sbtqa.htmlelements</groupId>
             <artifactId>htmlelements-matchers</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <groupId>ru.sbtqa.htmlelements</groupId>
             <artifactId>htmlelements-thucydides</artifactId>
             <version>${project.version}</version>
         </dependency>

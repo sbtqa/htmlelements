@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>ru.sbtqa.htmlelements</groupId>
         <artifactId>htmlelements</artifactId>
-        <groupId>ru.yandex.qatools.htmlelements</groupId>
         <version>1.18-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <groupId>ru.sbtqa.htmlelements</groupId>
             <artifactId>htmlelements-java</artifactId>
             <version>${project.version}</version>
         </dependency>
