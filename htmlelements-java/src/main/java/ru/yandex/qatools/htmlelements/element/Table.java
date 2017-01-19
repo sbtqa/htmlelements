@@ -62,7 +62,7 @@ public class Table extends TypifiedElement {
         for (WebElement rowElement : rowElements) {
             List<WebElement> columns = rowElement.findElements(By.xpath(".//td"));
             if (!columns.isEmpty()) {
-                rows.add(rowElement.findElements(By.xpath(".//td")));
+                rows.add(columns);
             }
         }
         return rows;
@@ -75,10 +75,9 @@ public class Table extends TypifiedElement {
      */
     public List<List<String>> getRowsAsString() {
         List<List<String>> rowValues = new ArrayList<>();
-        List<String> cellValues = new ArrayList<>();
-        for (List<WebElement> rows : getRows()) {
-            cellValues.clear();
-            for (WebElement cell : rows) {
+        for (List<WebElement> row : getRows()) {
+            List<String> cellValues = new ArrayList<>();
+            for (WebElement cell : row) {
                 cellValues.add(cell.getText());
             }
             rowValues.add(cellValues);
