@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static java.util.Objects.isNull;
-
 /**
  * Represents web page form tag.
  * Provides handy way of filling form with data and submitting it.
@@ -46,7 +44,7 @@ public class Form extends TypifiedElement {
         for (Map.Entry<String, Object> dataSet : data.entrySet()) {
             String key = dataSet.getKey();
             Object value = dataSet.getValue();
-            if (!isNull(key)) {
+            if (null != key) {
                 fillElement(findElementByKey(key), Objects.toString(value, ""));
             }
         }
