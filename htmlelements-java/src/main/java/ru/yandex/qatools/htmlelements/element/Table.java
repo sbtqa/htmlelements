@@ -128,9 +128,8 @@ public class Table extends TypifiedElement {
      */
     public List<List<String>> getColumnsAsString() {
         List<List<String>> columnsValues = new ArrayList<>();
-        List<String> cellValues = new ArrayList<>();
         for (List<WebElement> columns : getColumns()) {
-            cellValues.clear();
+        List<String> cellValues = new ArrayList<>();
             for (WebElement cell : columns) {
                 cellValues.add(cell.getText());
             }
@@ -171,17 +170,13 @@ public class Table extends TypifiedElement {
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
         List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<>();
+        List<String> headingElements = getHeadingsAsString();
 
         for (List<WebElement> row : getRows()) {
-            if (row.size() != headings.size()) {
-                throw new HtmlElementsException("Headings count is not equal to number of cells in row");
-            }
-
             Map<String, WebElement> rowToHeadingsMap = new HashMap<>();
-            int cellNumber = 0;
             for (String heading : headings) {
-                rowToHeadingsMap.put(heading, row.get(cellNumber));
-                cellNumber++;
+                rowToHeadingsMap.put(heading, row.get(headingElements.indexOf(heading)));
+
             }
             rowsMappedToHeadings.add(rowToHeadingsMap);
         }
