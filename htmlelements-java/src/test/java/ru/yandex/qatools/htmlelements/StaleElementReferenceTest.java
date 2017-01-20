@@ -6,9 +6,6 @@ import org.junit.rules.ExpectedException;
 import org.openqa.selenium.StaleElementReferenceException;
 import ru.yandex.qatools.htmlelements.testpages.StaleElementReferencePage;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-
 /**
  * @author Artem Eroshenko <erosenkoam@me.com>
  */
@@ -22,8 +19,7 @@ public class StaleElementReferenceTest {
     public void testOutput() {
         StaleElementReferencePage staleElementReferencePage = new StaleElementReferencePage();
         thrown.expect(StaleElementReferenceException.class);
-        String elementText = staleElementReferencePage.getElement().getText();
-        assertThat(elementText, equalTo(StaleElementReferencePage.ELEMENT_TEXT));
+        staleElementReferencePage.getElement().getText();
     }
 
 }
