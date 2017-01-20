@@ -3,12 +3,9 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static java.util.Objects.isNull;
 
 /**
  * Represents web page form tag.
@@ -44,12 +41,13 @@ public class Form extends TypifiedElement {
      * @param data Map containing data to fill form inputs with.
      */
     public void fill(Map<String, Object> data) {
-        data.entrySet().stream()
-                .map(e -> new AbstractMap.SimpleEntry<>(
-                        findElementByKey(e.getKey()),
-                        Objects.toString(e.getValue(), "")))
-                .filter(e -> !isNull(e.getKey()))
-                .forEach(e -> fillElement(e.getKey(), e.getValue()));
+        for (Map.Entry<String, Object> dataSet : data.entrySet()) {
+            String key = dataSet.getKey();
+            Object value = dataSet.getValue();
+            if (null != key) {
+                fillElement(findElementByKey(key), Objects.toString(value, ""));
+            }
+        }
     }
 
     protected WebElement findElementByKey(String key) {

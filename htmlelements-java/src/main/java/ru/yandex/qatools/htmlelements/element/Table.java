@@ -2,17 +2,15 @@ package ru.yandex.qatools.htmlelements.element;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
+import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 /**
- * Represents web page table element. Provides convenient ways of retrieving data stored in it.
+ * Represents web page table element. Provides convenient ways of retrieving
+ * data stored in it.
  *
  * @author Alexander Tolmachev starlight@yandex-team.ru
  *         Date: 11.03.13
@@ -46,9 +44,11 @@ public class Table extends TypifiedElement {
      * @return List with text values of table heading elements.
      */
     public List<String> getHeadingsAsString() {
-        return getHeadings().stream()
-                .map(WebElement::getText)
-                .collect(toList());
+        List<String> headingsAsString = new ArrayList<>();
+        for (WebElement heading : getHeadings()) {
+            headingsAsString.add(heading.getText());
+        }
+        return headingsAsString;
     }
 
     /**
@@ -57,12 +57,15 @@ public class Table extends TypifiedElement {
      * @return List where each item is a table row.
      */
     public List<List<WebElement>> getRows() {
-        return getWrappedElement()
-                .findElements(By.xpath(".//tr"))
-                .stream()
-                .map(rowElement -> rowElement.findElements(By.xpath(".//td")))
-                .filter(row -> row.size() > 0) // ignore rows with no <td> tags
-                .collect(toList());
+        List<List<WebElement>> rows = new ArrayList<>();
+        List<WebElement> rowElements = getWrappedElement().findElements(By.xpath(".//tr"));
+        for (WebElement rowElement : rowElements) {
+            List<WebElement> columns = rowElement.findElements(By.xpath(".//td"));
+            if (!columns.isEmpty()) {
+                rows.add(columns);
+            }
+        }
+        return rows;
     }
 
     /**
@@ -71,11 +74,15 @@ public class Table extends TypifiedElement {
      * @return List where each item is text values of a table row.
      */
     public List<List<String>> getRowsAsString() {
-        return getRows().stream()
-                .map(row -> row.stream()
-                        .map(WebElement::getText)
-                        .collect(toList()))
-                .collect(toList());
+        List<List<String>> rowValues = new ArrayList<>();
+        for (List<WebElement> row : getRows()) {
+            List<String> cellValues = new ArrayList<>();
+            for (WebElement cell : row) {
+                cellValues.add(cell.getText());
+            }
+            rowValues.add(cellValues);
+        }
+        return rowValues;
     }
 
     /**
@@ -120,11 +127,15 @@ public class Table extends TypifiedElement {
      * @return List where each item is text values of a table column.
      */
     public List<List<String>> getColumnsAsString() {
-        return getColumns().stream()
-                .map(row -> row.stream()
-                        .map(WebElement::getText)
-                        .collect(toList()))
-                .collect(toList());
+        List<List<String>> columnsValues = new ArrayList<>();
+        for (List<WebElement> columns : getColumns()) {
+        List<String> cellValues = new ArrayList<>();
+            for (WebElement cell : columns) {
+                cellValues.add(cell.getText());
+            }
+            columnsValues.add(cellValues);
+        }
+        return columnsValues;
     }
 
     /**
@@ -139,46 +150,70 @@ public class Table extends TypifiedElement {
     }
 
     /**
-     * Returns list of maps where keys are table headings and values are table row elements ({@code <td>}).
+     * Returns list of maps where keys are table headings and values are table
+     * row elements ({@code <td>}).
+     *
+     * @return List of maps where keys are table headings and values are table *
+     * row elements.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings() {
-        List<String> headingsAsString = getHeadingsAsString();
-        return getRows().stream()
-                .map(row -> row.stream()
-                        .collect(toMap(e -> headingsAsString.get(row.indexOf(e)), identity())))
-                .collect(toList());
+        return getRowsMappedToHeadings(getHeadingsAsString());
     }
 
     /**
-     * Returns list of maps where keys are passed headings and values are table row elements ({@code <td>}),.
+     * Returns list of maps where keys are passed headings and values are table
+     * row elements ({@code <td>}).
      *
      * @param headings List containing strings to be used as table headings.
+     * @return List of maps where keys are passed headings and values are table
+     * row elements.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
-        return getRowsMappedToHeadings().stream()
-                .map(e -> e.entrySet().stream().filter(m -> headings.contains(m.getKey()))
-                        .collect(toMap(Map.Entry::getKey, Map.Entry::getValue)))
-                .collect(toList());
+        List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<>();
+        List<String> headingElements = getHeadingsAsString();
+
+        for (List<WebElement> row : getRows()) {
+            Map<String, WebElement> rowToHeadingsMap = new HashMap<>();
+            for (String heading : headings) {
+                if (!headingElements.contains(heading)) {
+                    throw new HtmlElementsException("Header in the table can not be found: " + heading);
+                }
+                rowToHeadingsMap.put(heading, row.get(headingElements.indexOf(heading)));
+            }
+            rowsMappedToHeadings.add(rowToHeadingsMap);
+        }
+        return rowsMappedToHeadings;
     }
 
     /**
-     * Same as {@link #getRowsMappedToHeadings()} but retrieves text from row elements ({@code <td>}).
+     * Same as {@link #getRowsMappedToHeadings()} but retrieves text from row
+     * elements ({@code <td>}).
+     *
+     * @return List of maps where keys are passed headings and values are table
+     * row text of elements.
      */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings() {
-        return getRowsMappedToHeadings().stream()
-                .map(m -> m.entrySet().stream()
-                        .collect(toMap(Map.Entry::getKey, e -> e.getValue().getText())))
-                .collect(toList());
+        return getRowsAsStringMappedToHeadings(getHeadingsAsString());
 
     }
 
     /**
-     * Same as {@link #getRowsMappedToHeadings(java.util.List)} but retrieves text from row elements ({@code <td>}).
+     * Same as {@link #getRowsMappedToHeadings(java.util.List)} but retrieves
+     * text from row elements ({@code <td>}).
+     *
+     * @param headings List containing strings to be used as table headings.
+     * @return List of maps where keys are passed headings and values are table
+     * row text of elements.
      */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings(List<String> headings) {
-        return getRowsMappedToHeadings(headings).stream()
-                .map(m -> m.entrySet().stream()
-                        .collect(toMap(Map.Entry::getKey, e -> e.getValue().getText())))
-                .collect(toList());
+        List<Map<String, String>> rowsMappedToHeadings = new ArrayList<>();
+        for (Map<String, WebElement> row : getRowsMappedToHeadings(headings)) {
+            Map<String, String> rowMap = new HashMap<>();
+            for (Map.Entry<String, WebElement> cell : row.entrySet()) {
+                rowMap.put(cell.getKey(), cell.getValue().getText());
+            }
+            rowsMappedToHeadings.add(rowMap);
+        }
+        return rowsMappedToHeadings;
     }
 }

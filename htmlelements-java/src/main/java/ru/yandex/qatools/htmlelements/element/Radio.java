@@ -13,8 +13,10 @@ import java.util.List;
  *         Date: 14.08.12
  */
 public class Radio extends TypifiedElement {
+
     /**
-     * Specifies a radio button of a radio button group that will be used to find all other buttons of this group.
+     * Specifies a radio button of a radio button group that will be used to
+     * find all other buttons of this group.
      *
      * @param wrappedElement {@code WebElement} representing radio button.
      */
@@ -35,8 +37,8 @@ public class Radio extends TypifiedElement {
             xpath = "self::* | following::input[@type = 'radio'] | preceding::input[@type = 'radio']";
         } else {
             xpath = String.format(
-                    "self::* | following::input[@type = 'radio' and @name = '%s'] | " +
-                            "preceding::input[@type = 'radio' and @name = '%s']",
+                    "self::* | following::input[@type = 'radio' and @name = '%s'] | "
+                    + "preceding::input[@type = 'radio' and @name = '%s']",
                     radioName, radioName);
         }
 
@@ -46,23 +48,31 @@ public class Radio extends TypifiedElement {
     /**
      * Returns selected radio button.
      *
-     * @return {@code WebElement} representing selected radio button or {@code null} if no radio buttons are selected.
+     * @return {@code WebElement} representing selected radio button or
+     * {@code null} if no radio buttons are selected.
      */
     public WebElement getSelectedButton() {
-        return getButtons().stream()
-                .filter(WebElement::isSelected)
-                .findAny()
-                .orElseThrow(() -> new NoSuchElementException("No selected button"));
+        for (WebElement button : getButtons()) {
+            if (button.isSelected()) {
+                return button;
+            }
+        }
+        throw new NoSuchElementException("No selected button");
     }
 
     /**
      * Indicates if radio group has selected button.
      *
-     * @return {@code true} if radio has selected button and {@code false} otherwise.
+     * @return {@code true} if radio has selected button and {@code false}
+     * otherwise.
      */
     public boolean hasSelectedButton() {
-        return getButtons().stream()
-                .anyMatch(WebElement::isSelected);
+        for (WebElement button : getButtons()) {
+            if (button.isSelected()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -71,13 +81,13 @@ public class Radio extends TypifiedElement {
      * @param value The value to match against.
      */
     public void selectByValue(String value) {
-        WebElement matchingButton = getButtons().stream()
-                .filter(b -> value.equals(b.getAttribute("value")))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(
-                        String.format("Cannot locate radio button with value: %s", value)));
-
-        selectButton(matchingButton);
+        for (WebElement button : getButtons()) {
+            if (value.equals(button.getAttribute("value"))) {
+                selectButton(button);
+                return;
+            }
+        }
+        throw new NoSuchElementException(String.format("Cannot locate radio button with value: %s", value));
     }
 
     /**
