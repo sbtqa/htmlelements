@@ -175,8 +175,10 @@ public class Table extends TypifiedElement {
         for (List<WebElement> row : getRows()) {
             Map<String, WebElement> rowToHeadingsMap = new HashMap<>();
             for (String heading : headings) {
+                if (!headingElements.contains(heading)) {
+                    throw new HtmlElementsException("Header in the table can not be found: " + heading);
+                }
                 rowToHeadingsMap.put(heading, row.get(headingElements.indexOf(heading)));
-
             }
             rowsMappedToHeadings.add(rowToHeadingsMap);
         }
