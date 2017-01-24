@@ -14,13 +14,13 @@ import java.util.List;
 
 /**
  * The base class to be used for making blocks of elements.
- * <p/>
+ * 
  * To make a class that will represent a block of elements (e.g. web form) create a descendant of this class,
  * annotate it with {@link ru.yandex.qatools.htmlelements.annotations.Name} annotation if necessary
  * and fill it with elements.
- * <p/>
+ * 
  * For example:
- * <p/>
+ * 
  * <pre class="code">
  * &#64;Name("Search Form")
  * &#64;FindBy(css = "form_css")
@@ -28,24 +28,24 @@ import java.util.List;
  * &#64;Name("Request Input")
  * &#64;FindBy(css = "request_input_css")
  * private TextInput requestInput;
- * <p/>
+ * 
  * &#64;Name("Search Button")
  * &#64;FindBy(css = "search_button_css")
  * private Button searchButton;
- * <p/>
+ * 
  * public TextInput getRequestInput() {
  * return requestInput;
  * }
- * <p/>
+ * 
  * public Button getSearchButton() {
  * return searchButton;
  * }
  * }
  * </pre>
- * <p/>
+ * 
  * Then you can use created blocks as fields of page objects or you can also initialize them directly with methods of
  * {@link ru.yandex.qatools.htmlelements.loader.HtmlElementLoader} class.
- * <p/>
+ * 
  * Note that this class implements {@link WebElement} interface so you can substitute instances of your block classes
  * for {@code WebElements} where it's necessary.
  *

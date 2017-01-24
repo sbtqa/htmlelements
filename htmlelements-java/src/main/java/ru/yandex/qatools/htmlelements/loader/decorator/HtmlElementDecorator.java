@@ -23,9 +23,9 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
 
 /**
  * Decorator which is used to decorate fields of blocks and page objects.
- * <p/>
+ * 
  * Will decorate the following fields with lazy proxies:
- * <p/>
+ * 
  * <ul>
  * <li>{@code WebElement}</li>
  * <li>{@code List<WebElement>}</li>
@@ -34,7 +34,7 @@ import static ru.yandex.qatools.htmlelements.utils.HtmlElementUtils.*;
  * <li>Typified element ({@link ru.yandex.qatools.htmlelements.element.TypifiedElement} successors)</li>
  * <li>List of typified elements</li>
  * </ul>
- * <p/>
+ * 
  * {@code WebElements}, lists of {@code WebElements}, typified elements and lists of typified elements
  * have to be marked with {@link org.openqa.selenium.support.FindBy}, {@link org.openqa.selenium.support.FindBys}
  * or {@link org.openqa.selenium.support.FindAll} annotation.

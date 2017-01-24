@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Checks if specified {@code WebElement} currently exists on page.
- * <p/>
+ * 
  * This matcher is very useful to test if some dynamically loaded page element which is represented with
  * lazily initialised {@code WebElement} has already appeared on page.
  *

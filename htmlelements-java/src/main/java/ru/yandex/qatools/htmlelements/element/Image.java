@@ -3,7 +3,7 @@ package ru.yandex.qatools.htmlelements.element;
 import org.openqa.selenium.WebElement;
 
 /**
- * Represents image <img />
+ * Represents image 
  *
  * @author Nikolay Mulyar proxeter@yandex-team.ru
  */

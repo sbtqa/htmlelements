@@ -68,14 +68,14 @@ public class HtmlElementLoader {
     /**
      * Creates an instance of the given class representing a block of elements and initializes its fields
      * with lazy proxies.
-     * <p/>
+     * 
      * Processes annotation of the given class
      * to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
      * annotations of its fields for setting the way of locating elements of the block.
-     * <p/>
+     * 
      * Fields to be proxied:
-     * <p/>
+     * 
      * <ul>
      * <li>{@code WebElement}</li>
      * <li>List of {@code WebElements}</li>
@@ -137,13 +137,13 @@ public class HtmlElementLoader {
 
     /**
      * Creates an instance of the given page object class and initializes its fields with lazy proxies.
-     * <p/>
+     * 
      * Processes {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
      * annotations of the fields for setting the way of locating them.
-     * <p/>
+     * 
      * Fields to be proxied:
-     * <p/>
+     * 
      * <ul>
      * <li>{@code WebElement}</li>
      * <li>List of {@code WebElements}</li>
@@ -170,14 +170,14 @@ public class HtmlElementLoader {
 
     /**
      * Initializes fields of the given block of elements with lazy proxies.
-     * <p/>
+     * 
      * Processes annotation of the class
      * of the given block to set the way of locating the block itself and {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll} annotations of its
      * fields for setting the way of locating elements of the block.
-     * <p/>
+     * 
      * Fields to be proxied:
-     * <p/>
+     * 
      * <ul>
      * <li>{@code WebElement}</li>
      * <li>List of {@code WebElements}</li>
@@ -218,13 +218,13 @@ public class HtmlElementLoader {
 
     /**
      * Initializes fields of the given page object with lazy proxies.
-     * <p/>
+     * 
      * Processes {@link org.openqa.selenium.support.FindBy},
      * {@link org.openqa.selenium.support.FindBys} and {@link org.openqa.selenium.support.FindAll}
      * annotations of the fields for setting the way of locating them.
-     * <p/>
+     * 
      * Fields to be proxied:
-     * <p/>
+     * 
      * <ul>
      * <li>{@code WebElement}</li>
      * <li>List of {@code WebElements}</li>

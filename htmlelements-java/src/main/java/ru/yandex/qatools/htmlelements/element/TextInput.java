@@ -23,7 +23,7 @@ public class TextInput extends TypifiedElement {
     /**
      * @return Text entered into the text input.
      * @deprecated Use getText() instead.
-     * <p/>
+     * 
      * Retrieves the text entered into this text input.
      */
     @Deprecated

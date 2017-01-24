@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * Annotation that is used for setting waiting timeout value, which will be used for waiting an element to appear.
  * For example:
- * <p/>
+ * 
  * <pre class="code">
  * &#64;FindBy(css = "my_form_css")
  * &#64;Timeout(3)
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * &#64;FindBy(css = "text_input_css")
  * &#64;Timeout(3)
  * private TextInput textInput;
- * <p/>
+ * 
  * // Other elements and methods here
  * }
  * </pre>

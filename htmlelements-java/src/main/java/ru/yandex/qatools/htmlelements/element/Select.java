@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Represents web page select control.
- * <p/>
+ * 
  * Actually this class wraps {@code WebDriver} {@link org.openqa.selenium.support.ui.Select} and delegates
  * all method calls to it. But unlike {@code WebDriver} {@code Select} class there are no checks performed
  * in the constructor of this class, so it can be used correctly with lazy initialization mechanism.
@@ -89,7 +89,7 @@ public class Select extends TypifiedElement {
     /**
      * Select all options that display text matching the argument. That is, when given "Bar" this
      * would select an option like:
-     * <p/>
+     * 
      * &lt;option value="foo"&gt;Bar&lt;/option&gt;
      *
      * @param text The visible text to match against
@@ -111,7 +111,7 @@ public class Select extends TypifiedElement {
     /**
      * Select all options that have a value matching the argument. That is, when given "foo" this
      * would select an option like:
-     * <p/>
+     * 
      * &lt;option value="foo"&gt;Bar&lt;/option&gt;
      *
      * @param value The value to match against
@@ -132,7 +132,7 @@ public class Select extends TypifiedElement {
     /**
      * Deselect all options that have a value matching the argument. That is, when given "foo" this
      * would deselect an option like:
-     * <p/>
+     * 
      * &lt;option value="foo"&gt;Bar&lt;/option&gt;
      *
      * @param value The value to match against
@@ -154,7 +154,7 @@ public class Select extends TypifiedElement {
     /**
      * Deselect all options that display text matching the argument. That is, when given "Bar" this
      * would deselect an option like:
-     * <p/>
+     * 
      * &lt;option value="foo"&gt;Bar&lt;/option&gt;
      *
      * @param text The visible text to match against

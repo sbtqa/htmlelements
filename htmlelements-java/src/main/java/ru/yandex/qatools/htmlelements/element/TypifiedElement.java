@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * The base class to be used for making classes representing typified elements (i.e web page controls such as
  * text inputs, buttons or more complex elements).
- * <p/>
+ * 
  * There are several already written classes representing standard web page controls:
  * <ul>
  * <li>{@link Table}</li>
@@ -29,15 +29,15 @@ import java.util.List;
  * <li>{@link Form}</li>
  * <li>{@link FileInput}</li>
  * </ul>
- * <p/>
+ * 
  * But you can also write your own typified elements if needed. For example:
- * <p/>
+ * 
  * <pre>
  * <code>public class Link extends TypifiedElement {
  * public Link(WebElement wrappedElement) {
  * super(wrappedElement);
  * }
- * <p/>
+ * 
  * public String getReference() {
  * return getWrappedElement().getAttribute("href");
  * }

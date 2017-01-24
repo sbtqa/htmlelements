@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 /**
  * Annotation that is used to set a name for a block of elements or for an element in a block
  * or for a page object element.
- * <p/>
+ * 
  * For example:
- * <p/>
+ * 
  * <pre class="code">
  * &#64;Name("My Form")
  * &#64;FindBy(css = "my_form_css")
@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
  * &#64;Name("Text input name")
  * &#64;FindBy(css = "text_input_css")
  * private TextInput textInput;
- * <p/>
+ * 
  * // Other elements and methods here
  * }
  * </pre>
