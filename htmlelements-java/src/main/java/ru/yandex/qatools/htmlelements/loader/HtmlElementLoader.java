@@ -128,6 +128,9 @@ public class HtmlElementLoader {
         try {
             T instance = newInstance(elementClass, elementToWrap);
             instance.setName(name);
+            // patch for Yandex typified elements, allowing recursive initialization for nested elements
+            // same as for htmlelement
+            populatePageObject(instance, elementToWrap); 
             return instance;
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
                 | InvocationTargetException e) {
